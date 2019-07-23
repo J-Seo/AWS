@@ -1,0 +1,84 @@
+Origin과 Distribution 사이의 최신화 문제
+
+1. CloudFront Distributions
+
+ID (관리자 설정) > Behaviors > Edit
+
+Path  Pattern 
+
+클라우드에 들어오는 모든 동작을 제어함
+
+Edit를 누르면
+
+Object Cahcing 항목을 보면 Use Origin Cache Headers
+
+cloud front가 얼마나 자주 web server에 최신 값을 요청 및 응답할 것인지
+
+max - age = 60이면 60초 동안은 유효하게 여김, 60초 동안 지속함
+
+2. Cache Control
+
+apache를 활용해서 log를 계속해서 받을 수 있음
+
+cloudfront에서는 새로고침을 해도 log가 발생하지 않음
+
+origin에 로그될 경우에만 log가 발생
+
+==> header("Cache-Control: max-age =10 ");
+으로 지정해주면 10초간은 cloudfront가 보유하고 있음
+그 10초마다 최신화
+
+3. Invalidation
+
+캐시 강제로 삭제하기
+
+invalidation 탭이 있음
+
+무효화 방법은 경로를 /images/*, /images/image* 등으로 범위 설정 가능 
+(도움말 참조)
+
+4. Behavior 탭
+
+max-age로 모든 캐시 컨트롤을 할 수는 없음
+
+Object Caching에서 Customize를 선택하면
+
+Min TTL에서 최소 5초는 유지
+Max TTL에서 최대 15초보다는 적게 유지
+Default TTL에서 10초 --> 별도로 지정이 없을 경우 
+
+로 조금 더 세부적으로 컨트롤 가능.
+
+5. Query String
+
+?id = 1 같은 것
+
+all로 지정하면 ?id = 1과 ?id= 2는 다른 것으로 간주
+
+지정하지 않으면 그 이외의 값을 무시 
+
+
+6. CDN
+
+Distribution > General > Edit
+
+price class --> edge location
+
+크고 작은 원들이 전 세계에 퍼져 있는 cloudfront server를 의미
+
+가격이 다 다름
+
+cloudfront 요금 체제도 다름. 
+
+region 데이터를 전송한다는 것.
+
+edge location에서 지역별 고객에게 전송 ==> 과금
+edge location에서 origin server 전송 ==> 과금
+
+
+
+
+
+
+
+
