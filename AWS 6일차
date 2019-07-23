@@ -1,0 +1,94 @@
+1. 웹 서버와 웹 브라우저
+
+Web Browser -> request -> Web Server
+
+Web Server -> response -> Web Browser
+
+==> Client와 Server와의 관계임
+
+클라이언트 컴퓨터와 서버 컴퓨터 두 대가 필요한 것.
+
+2. S3 Webserver 서비스
+
+새로운 버킷 만들기
+
+web1-html-bucket
+
+리전 설정
+
+퍼블릭 설정으로 해야 함.
+
+버킷 만들기
+
+드래그 앤 드롭으로 업로드
+
+세부 설정으로 다음 > 퍼블릭 권한 관리에서 누구나
+
+3. 속성
+
+정적 웹 사이트 호스팅
+
+이 버킷을 사용해서 웹 사이트 호스팅
+
+1.html을 홈페이지로 사용
+
+저장 버튼을 하면, 웹 사이트 저장
+
+엔드 포인트: 우리 웹 사이트의 주소
+
+1.html을 생략해도 메인 홈페이지는 접근이 가능. 
+
+현재 우리 홈페이지: http://deep-web-post.s3-website.ap-northeast-2.amazonaws.com
+
+4. Cloud Front
+
+Cache와 CDN
+
+Cache는? 장고 nodejs로 웹을 서비스 한다면?
+
+프로그래밍 언어를 통해서 동적 언어를 통해 요청할 때마다 응답하도록 함
+
+더 많은 시간과 비용을 필요로 함.
+
+1회 요청을 했다면, Cache를 이용해서 저장된 결과를 다시 반복해줌
+
+이것을 전담하는 것 Cache Server
+
+CDN은?
+
+전 세계에 있는 사용자들에게 컨텐츠를 빠르게 전송
+
+Cache Server를 활용하기 위해서는 CloudFront를 이용하면 됨.
+
+
+Cloud Front = Cache Server + CDN
+
+
+5. Cloud Front
+
+웹 서버를 하나 마련했음.
+
+동적 서버를 활용할 경우 속도가 느려질 수 있음.
+
+6. Console > 서비스 > CloudFront
+
+create distribution을 누르기 
+
+웹 서버가 직접 client를 만나지 않고
+
+cloud Front가 중간에서 전달
+
+그 이후의 정보는 cloud front가 웹 서버를 거치지 않고 해줌
+
+origin (웹 서버) distribution (cloudFront)
+
+7. Create Distribution
+
+Origin Domain Name: 웹 서버의 주소를 쓰면 됨. AWS를 쓰고 있다면 클릭해서 사용, 그게 아니면 카피한 도메인만!
+
+HTTP Port가 80이 아니라면, origin port를 써주어야 함 ex) 8080
+
+
+
+
+
